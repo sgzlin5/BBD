@@ -558,7 +558,7 @@ again:
                 recvfrom(bbd->ccc.punch_pool[pool_id], revbuf, BBD_PKT_BUF_SIZE, 0, (struct sockaddr *)&sender_sock, &slen);
                 if (!strncmp(BBD_PUNCH_MSG, revbuf, strlen(BBD_PUNCH_MSG))) {
                     printf(" => Punch from peer [%s:%d] \n", intoa(ntohl(sender_sock.sin_addr.s_addr), tmp, sizeof(tmp)), ntohs(sender_sock.sin_port));
-                    printf("nc -u %d %s %d\n", bbd_get_port_from_socket(bbd->ccc.punch_pool[pool_id]), intoa(ntohl(sender_sock.sin_addr.s_addr), tmp, sizeof(tmp)), ntohs(sender_sock.sin_port));
+                    printf("nc -u -p %d %s %d\n", bbd_get_port_from_socket(bbd->ccc.punch_pool[pool_id]), intoa(ntohl(sender_sock.sin_addr.s_addr), tmp, sizeof(tmp)), ntohs(sender_sock.sin_port));
                 } else {
                     if (cnt < 10) {
                         goto again;
