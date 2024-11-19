@@ -24,12 +24,14 @@ Client2:P2        ---   Punch Msg  ---> Client1:P3[0:599] (Perdict peer's port)
 ```
 ## Host
 ```
+cmake .
 make
 ./bbd -s -l 7777
 ```
 
 ## Edge
 ```
+cmake .
 make
 ./bbd -c -h host-server.ip -p 7777
 ```
