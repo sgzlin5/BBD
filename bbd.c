@@ -235,6 +235,9 @@ static int bbd_server_start(struct bbd *bbd)
                         info[0].bbd_type = BBD_VISITOR;
                         info[1].bbd_type = BBD_HOLDER;
                     }
+                } else if (bbd->sss.nat_type[0] == bbd->sss.nat_type[1] && bbd->sss.nat_type[0] == BBD_HARD_NAT) {
+                    info[0].bbd_type = BBD_VISITOR;
+                    info[1].bbd_type = BBD_VISITOR;
                 } else {
                     if ((bbd->sss.max_port[0] - bbd->sss.min_port[0]) > (bbd->sss.max_port[1] - bbd->sss.min_port[1])) {
                         info[0].bbd_type = BBD_HOLDER;
