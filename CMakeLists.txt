@@ -4,4 +4,4 @@ project(TestProject)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(test bbd.c stun.c message.c)
+add_executable(bbd bbd.c stun.c message.c)
