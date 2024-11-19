@@ -7,8 +7,6 @@ This project is a simple demo to prove it is possible to punch a hole between NA
 3) NAT3 should be easy NAT, NAT4 should be hard NAT
 4) NAT4 keep NAT mapping, NAT3 use 600 random ports according to peer's port range to punch a p2p hole
 
-The key point is Client1(NAT3) to predict Client2(NAT4) NATed port
-
 ```
 Process:
 
