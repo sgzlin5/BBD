@@ -38,25 +38,31 @@ make
 
 ## Example
 ```
+Client A:
+
 STUN request sent to 49.12.125.53:3478
 STUN response received
-XOR-Mapped Address: 31069
+XOR-Mapped Address: 33191
 STUN request sent to 49.12.125.53:3479
 STUN response received
-XOR-Mapped Address: 31088
-Local-Deivce Hard-NAT Detected (Local Port [65000] Mapped Port[31069:31088])Client Init Socket OK
+XOR-Mapped Address: 33208
+Local-Deivce Hard-NAT Detected (Local Port [65000] Mapped Port[33191:33208])Client Init Socket OK
 STUN request sent to 49.12.125.53:3478
 STUN response received
-XOR-Mapped Address: 30958
-Get Mapped Port [30958]
+XOR-Mapped Address: 30869
+Get Mapped Port [30869]
 STUN request sent to 49.12.125.53:3478
 STUN response received
-XOR-Mapped Address: 34326
-Get Mapped Port [34326]
+XOR-Mapped Address: 34318
+Get Mapped Port [34318]
+STUN request sent to 49.12.125.53:3478
+Stun receive timeout
+STUN request sent to 49.12.125.53:3478
+Stun receive timeout
 STUN request sent to 49.12.125.53:3478
 STUN response received
-XOR-Mapped Address: 33001
-Get Mapped Port [33001]
+XOR-Mapped Address: 33218
+Get Mapped Port [33218]
 STUN request sent to 49.12.125.53:3478
 Stun receive timeout
 STUN request sent to 49.12.125.53:3478
@@ -64,22 +70,10 @@ Stun receive timeout
 STUN request sent to 49.12.125.53:3478
 Stun receive timeout
 STUN request sent to 49.12.125.53:3478
-STUN response received
-XOR-Mapped Address: 30996
-Get Mapped Port [30996]
+Stun receive timeout
 STUN request sent to 49.12.125.53:3478
-STUN response received
-XOR-Mapped Address: 34650
-Get Mapped Port [34650]
-STUN request sent to 49.12.125.53:3478
-STUN response received
-XOR-Mapped Address: 11525
-Get Mapped Port [11525]
-STUN request sent to 49.12.125.53:3478
-STUN response received
-XOR-Mapped Address: 31106
-Get Mapped Port [31106]
-Min-Port[11325] Max-Port[34850]
+Stun receive timeout
+Min-Port[30669] Max-Port[34518]
  <= Hello 
  => Ask Peer Info 
  <= Receive Peer Info
@@ -91,8 +85,57 @@ We are holder
 We are holder
 We are holder
 We are holder
-We are holder
- => Punch from peer [112.5.155.8:33576] 
-nc -u -p 42577 112.5.155.8 33576
+ => Punch from peer [112.5.155.8:40492] 
+nc -u -p 43403 112.5.155.8 40492
+ <= Punch 
+```
+
+```
+Client B:
+
+STUN request sent to 49.12.125.53:3478
+STUN response received
+XOR-Mapped Address: 65000
+STUN request sent to 49.12.125.53:3479
+STUN response received
+XOR-Mapped Address: 65000
+Local-Deivce Easy-NAT Detected (Local Port [65000] Mapped Port[65000:65000])Client Init Socket OK
+STUN request sent to 49.12.125.53:3478
+Stun receive timeout
+STUN request sent to 49.12.125.53:3478
+Stun receive timeout
+STUN request sent to 49.12.125.53:3478
+STUN response received
+XOR-Mapped Address: 40494
+Get Mapped Port [40494]
+STUN request sent to 49.12.125.53:3478
+STUN response received
+XOR-Mapped Address: 40495
+Get Mapped Port [40495]
+STUN request sent to 49.12.125.53:3478
+STUN response received
+XOR-Mapped Address: 40496
+Get Mapped Port [40496]
+STUN request sent to 49.12.125.53:3478
+STUN response received
+XOR-Mapped Address: 40497
+Get Mapped Port [40497]
+STUN request sent to 49.12.125.53:3478
+Stun receive timeout
+STUN request sent to 49.12.125.53:3478
+Stun receive timeout
+STUN request sent to 49.12.125.53:3478
+Stun receive timeout
+STUN request sent to 49.12.125.53:3478
+STUN response received
+XOR-Mapped Address: 40501
+Get Mapped Port [40501]
+Min-Port[40294] Max-Port[40701]
+ <= Hello 
+ => Ask Peer Info 
+ <= Receive Peer Info
+We are visitor, peer range[34518 ~ 30669]
+ => Punch from peer [112.49.223.217:34438] 
+nc -u -p 40492 112.49.223.217 34438
  <= Punch
 ```
