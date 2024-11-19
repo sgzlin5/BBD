@@ -134,7 +134,7 @@ static int bbd_server_wait_client(struct bbd *bbd)
 {
     struct sockaddr_in sender_sock;
     socklen_t slen;
-    int tmp_sock, rc, max_sd;
+    int rc, max_sd;
     fd_set socket_mask;
     struct timeval wait_time;
     ssize_t recvlen;
@@ -156,7 +156,7 @@ static int bbd_server_wait_client(struct bbd *bbd)
             if (FD_ISSET(bbd->sss.sock, &socket_mask)) {
                 recvlen = recvfrom(bbd->sss.sock, buf, BBD_PKT_BUF_SIZE, 0/*flags*/,
                     (struct sockaddr *) &sender_sock, (socklen_t *) &slen);
-                printf("Receive [%s] Length [%d]\n", buf, recvlen);
+                printf("Receive [%s] Length [%ld]\n", buf, recvlen);
                 rem = recvlen;
                 idx = 0;
                 decode_cmd(&cmd, buf, &rem, &idx);
@@ -180,8 +180,6 @@ static int bbd_server_wait_client(struct bbd *bbd)
 
 static int bbd_server_start(struct bbd *bbd)
 {
-    int ret;
-    int ok1, ok2;
     fd_set readfds;
     char buf[BBD_PKT_BUF_SIZE];
     char peer_ip_str[INET_ADDRSTRLEN];
@@ -189,7 +187,6 @@ static int bbd_server_start(struct bbd *bbd)
     socklen_t slen;
     ssize_t recvlen;
     uint16_t cmd;
-    struct bbd_hello hello;
     size_t idx, rem;
     struct timeval wait_time;
 
@@ -324,9 +321,8 @@ static void nat_type_test(struct bbd *bbd)
     uint16_t map_port[2] = {0};
     uint16_t local_port = 65000;
     int ret;
-    int cnt = 0, type;
+    int cnt = 0;
 
-    type = 0;
     while (1) {
 first_stun:
         ret = stun_send_binding(local_port, "49.12.125.53", 3478, &map_port[0]);
@@ -551,12 +547,10 @@ again:
     slen = sizeof(sender_sock);
     memset(revbuf, 0, BBD_PKT_BUF_SIZE);
     char tmp[32];
-    char peer_ip_str[INET_ADDRSTRLEN];
     rc = select(max_sd + 1, &readfds, NULL, NULL, &wait_time);
     if (rc > 0) {
         for (int id = 0; id < BBD_MAX_SOCKET; id++) {
             if (FD_ISSET(bbd->ccc.punch_pool[id], &readfds)) {
-                char tmp_buf[BBD_PKT_BUF_SIZE];
                 pool_id = id;
                 recvfrom(bbd->ccc.punch_pool[pool_id], revbuf, BBD_PKT_BUF_SIZE, 0, (struct sockaddr *)&sender_sock, &slen);
                 if (!strncmp(BBD_PUNCH_MSG, revbuf, strlen(BBD_PUNCH_MSG))) {
@@ -603,8 +597,6 @@ static int bbd_client_start(struct bbd *bbd)
 
 static void bbd_start(struct bbd *bbd)
 {
-    int ret;
-
     if (bbd->mode == bbd_server) {
         while (1) {
             bbd_server_start(bbd);
